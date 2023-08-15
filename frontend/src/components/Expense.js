@@ -16,6 +16,18 @@ const Expense = () => {
         dispatch(fetchExpense(res));
       });
   }, []);
+  const handleDeleteExpeses = (id) => {
+    const updatedData = storeData.filter((item) => {
+      return item.id !== id;
+    });
+
+    dispatch(fetchExpense(updatedData));
+
+    fetch(`http://localhost:4000/delete-expense/${id}`);
+  };
+  const handleEditExpeses=()=>{
+    
+  }
 
   return (
     <div>
@@ -46,9 +58,28 @@ const Expense = () => {
                       <td className="whitespace-nowrap px-6 py-4 font-medium">
                         {item.title}
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4">{item.category}</td>
-                      <td className="whitespace-nowrap px-6 py-4">{item.amount}</td>
-                      <td className="whitespace-nowrap px-6 py-4"><button>Delete</button></td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        {item.category}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        {item.amount}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        <button
+                          onClick={() => {
+                            handleDeleteExpeses(item.id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleEditExpeses(item.id);
+                          }}
+                        >
+                          Edit
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
