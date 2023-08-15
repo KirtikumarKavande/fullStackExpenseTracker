@@ -1,9 +1,31 @@
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import AddExpense from "./components/AddExpense";
+import Expense from "./components/Expense";
 
+import ErrorElement from "./components/Error";
+import Header from "./components/Header";
+import Layout from "./components/Layout";
 export default function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      errorElement: <ErrorElement />,
+      children: [
+        {
+          path: "/",
+          element: <AddExpense />,
+        },
+        {
+          path: "/expense",
+          element: <Expense/>,
+        },
+      ],
+    },
+  ]);
   return (
-   <>
-   <AddExpense/>
-   </>
-  )
+    <>
+      <RouterProvider router={router} />
+    </>
+  );
 }

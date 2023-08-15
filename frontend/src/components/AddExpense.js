@@ -2,7 +2,7 @@ import React from "react";
 
 const AddExpense = () => {
   return (
-    <div className=" flex flex-col w-96 m-auto space-y-3 p-3 border border-gray-400 shadow-lg bg-slate-300 mt-10 ">
+    <div className=" flex flex-col w-96 m-auto space-y-3 p-3 border border-gray-400 shadow-lg bg-slate-300 mt-24 rounded-md ">
       <label>Title</label>
       <input
         placeholder="title of Expense"
