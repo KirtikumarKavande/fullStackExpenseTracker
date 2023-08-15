@@ -11,7 +11,15 @@ const AddExpense = () => {
     const category = categoryRef.current.value;
     const amount = amountRef.current.value;
     const obj = { title, category, amount };
-    console.log(obj);
+
+    fetch("http://localhost:4000/add-expense",{
+      method: 'POST',
+      headers:{"content-type": "application/json"},
+      body: JSON.stringify(obj)
+    })
+    titleRef.current.value=""
+    categoryRef.current.value=""
+    amountRef.current.value=""
   };
 
   return (
@@ -31,10 +39,10 @@ const AddExpense = () => {
       <select className="border border-black" ref={categoryRef}>
         <option>not selected</option>
 
-        <option>Volvo</option>
-        <option>Saab</option>
-        <option>Mercedes</option>
-        <option>Audi</option>
+        <option>Grocery</option>
+        <option>Game</option>
+        <option>Party</option>
+        <option>Daily Essential</option>
       </select>
       <label>Amount</label>
       <input

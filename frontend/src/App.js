@@ -3,7 +3,6 @@ import AddExpense from "./components/AddExpense";
 import Expense from "./components/Expense";
 
 import ErrorElement from "./components/Error";
-import Header from "./components/Header";
 import Layout from "./components/Layout";
 export default function App() {
   const router = createBrowserRouter([
