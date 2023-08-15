@@ -1,12 +1,13 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
-const initialData = [];
+const initialState ={expenseData:[]};
 const expenseSlice = createSlice({
-  initialState: initialData,
   name: "expense",
+
+  initialState,
   reducers: {
     fetchExpense(state, action) {
-      state.initialData = action.payload;
+      state.expenseData = action.payload;
     },
   },
 });
