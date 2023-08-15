@@ -5,6 +5,9 @@ router.post("/add-expense", expensecontroller.addexpense);
 router.get("/show-expense", expensecontroller.getexpense);
 router.get("/delete-expense/:id", expensecontroller.deleteExpense);
 
+router.post("/edit-expense/:id", expensecontroller.editExpense);
+
+
 
 
 module.exports = router;

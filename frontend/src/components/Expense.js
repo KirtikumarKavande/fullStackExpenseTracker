@@ -1,10 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExpense } from "../store/expenseslice";
+import EditForm from "./EditForm";
 
 const Expense = () => {
   const storeData = useSelector((store) => store.dataExpense.expenseData);
-  console.log("store", storeData);
+  const [editexpense, setEditExpense] = useState({
+    status: false,
+    title: "",
+    category: "",
+    amount: "",
+  });
   const dispatch = useDispatch();
   useEffect(() => {
     fetch("http://localhost:4000/show-expense")
@@ -12,7 +18,6 @@ const Expense = () => {
         return data.json();
       })
       .then((res) => {
-        console.log(res);
         dispatch(fetchExpense(res));
       });
   }, []);
@@ -25,9 +30,9 @@ const Expense = () => {
 
     fetch(`http://localhost:4000/delete-expense/${id}`);
   };
-  const handleEditExpeses=()=>{
-    
-  }
+  const handleEditExpeses = (item) => {
+    setEditExpense({ ...item, status: true });
+  };
 
   return (
     <div>
@@ -64,8 +69,9 @@ const Expense = () => {
                       <td className="whitespace-nowrap px-6 py-4">
                         {item.amount}
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4">
+                      <td className="whitespace-nowrap px-6 py-4 ">
                         <button
+                        className="mr-8"
                           onClick={() => {
                             handleDeleteExpeses(item.id);
                           }}
@@ -74,7 +80,7 @@ const Expense = () => {
                         </button>
                         <button
                           onClick={() => {
-                            handleEditExpeses(item.id);
+                            handleEditExpeses(item);
                           }}
                         >
                           Edit
@@ -84,6 +90,12 @@ const Expense = () => {
                   ))}
                 </tbody>
               </table>
+              {editexpense.status && (
+                <EditForm
+                  editexpense={editexpense}
+                  setEditExpense={setEditExpense}
+                />
+              )}
             </div>
           </div>
         </div>
